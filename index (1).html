@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="theme-color" content="#0a1626">
+<title>ठगी रक्षक — पावर ओरिएंटर हब</title>
+<style>
+:root{
+  --bg:#0a1626;--bg2:#0d1c30;--card:#122339;--card2:#16294180;--line:#22406a;
+  --red:#ef4444;--red2:#b71c1c;--g:#22c98a;--g2:#15a06b;--gold:#f0b429;--blue:#3b82f6;
+  --txt:#eaf1fb;--mut:#93a8c8;--mut2:#6a82a6;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0}
+body{font-family:system-ui,"Noto Sans Devanagari",sans-serif;background:
+  radial-gradient(1200px 500px at 50% -120px,#13284a 0,transparent 70%),var(--bg);
+  color:var(--txt);line-height:1.6;min-height:100vh;padding-bottom:78px}
+.w{max-width:640px;margin:auto;padding:0 15px}
+button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
+
+/* top bar */
+#top{position:sticky;top:0;z-index:20;background:#0a1626e6;backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line)}
+#topin{max-width:640px;margin:auto;display:flex;align-items:center;gap:10px;padding:11px 15px}
+.badge{width:38px;height:38px;border-radius:11px;background:linear-gradient(145deg,#1f3a66,#0f2140);
+  display:grid;place-items:center;font-size:20px;box-shadow:inset 0 0 0 1px #2b4d82}
+#top h1{margin:0;font-size:17px;font-weight:800;letter-spacing:.2px}
+#top h1 b{color:var(--g)}
+#top .tag{font-size:11px;color:var(--mut);font-weight:600;margin-top:-2px}
+
+/* pages */
+.page{display:none;animation:fade .35s}
+.page.show{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+/* hero + call */
+.hero{text-align:center;padding:20px 6px 6px}
+.hero .big{font-size:23px;font-weight:800;margin:0}
+.hero p{color:var(--mut);margin:6px 0 0;font-size:14px}
+.call{display:flex;align-items:center;justify-content:center;gap:12px;
+  background:linear-gradient(145deg,#f04646,#c4162e);color:#fff;font-weight:800;font-size:21px;
+  text-decoration:none;padding:17px;border-radius:16px;margin:16px 0 4px;
+  box-shadow:0 8px 24px #ef444455;animation:pulse 2.2s infinite}
+.call .ic{font-size:24px}
+.call small{display:block;font-size:11.5px;font-weight:600;opacity:.92;letter-spacing:.2px}
+@keyframes pulse{0%,100%{box-shadow:0 8px 24px #ef444433}50%{box-shadow:0 8px 24px #ef444488,0 0 0 10px #ef444400}}
+.clock{display:flex;gap:10px;background:#1a1407;border:1px solid #6b4e12;border-radius:13px;
+  padding:11px 14px;margin:12px 0;font-size:13.5px;color:#ffe3a3}
+.clock b{color:#ffcf5c}
+
+.sec-title{font-size:13px;font-weight:800;color:var(--mut2);letter-spacing:.6px;
+  text-transform:uppercase;margin:22px 4px 10px}
+
+/* option grid */
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.opt{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 12px;
+  text-align:center;transition:.15s;position:relative;overflow:hidden}
+.opt:active{transform:scale(.97);background:#18304f}
+.opt .e{font-size:26px;display:block;margin-bottom:6px}
+.opt .t{font-size:13.5px;font-weight:700;line-height:1.35}
+
+/* step screen */
+.step{background:var(--card);border:1px solid var(--line);border-right:4px solid var(--g);
+  border-radius:13px;padding:13px 15px;margin:11px 0}
+.step h3{margin:0 0 4px;font-size:15.5px;display:flex;align-items:center;gap:9px;
+  flex-direction:row-reverse;justify-content:flex-end}
+.step .n{flex:none;background:linear-gradient(145deg,#26d696,#139e68);color:#04231a;width:27px;height:27px;
+  border-radius:50%;text-align:center;line-height:27px;font-weight:800;font-size:14px}
+.step p{margin:0;font-size:13.5px;color:#d3e0f2}
+.warn{display:flex;gap:9px;background:#2a1210;border:1px solid var(--red2);border-radius:13px;
+  padding:12px 14px;margin:14px 0;font-size:13.5px}
+.warn b{color:#ff9a90}
+.linkbtn{display:flex;align-items:center;justify-content:center;gap:9px;
+  background:var(--card);border:1px solid var(--g);color:var(--g);text-decoration:none;
+  font-weight:700;padding:14px;border-radius:13px;margin:10px 0;font-size:15.5px}
+.linkbtn:active{background:#113a2c}
+.back{display:flex;align-items:center;justify-content:center;gap:7px;color:var(--mut);
+  width:100%;font-size:14px;padding:12px;margin-top:6px}
+.selhead{display:flex;align-items:center;gap:10px;background:var(--card2);border:1px solid var(--line);
+  border-radius:13px;padding:12px 14px;margin-bottom:4px}
+.selhead .e{font-size:26px}
+.selhead .t{font-weight:800;font-size:16px}
+
+/* prevention cards */
+.pcard{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 15px;margin:11px 0}
+.pcard h3{margin:0 0 5px;font-size:15.5px;display:flex;align-items:center;gap:8px}
+.pcard p{margin:0;font-size:13.5px;color:#d3e0f2}
+.pcard .em{font-size:20px}
+
+/* numbers */
+.num{display:flex;align-items:center;justify-content:space-between;gap:12px;
+  background:var(--card);border:1px solid var(--line);border-radius:14px;padding:13px 15px;margin:10px 0}
+.num .l .t{font-weight:800;font-size:16px}
+.num .l .d{font-size:12.5px;color:var(--mut)}
+.num a{background:linear-gradient(145deg,#2a8fff,#1b63d6);color:#fff;font-weight:800;
+  padding:10px 16px;border-radius:11px;text-decoration:none;font-size:15px;white-space:nowrap}
+.tip{background:#0e2238;border:1px dashed var(--blue);border-radius:13px;padding:12px 14px;
+  margin:14px 0;font-size:13px;color:#bcd4f5}
+.tip b{color:#7db4ff}
+
+footer{text-align:center;color:var(--mut2);font-size:11.5px;margin:26px 4px 10px;
+  border-top:1px solid var(--line);padding-top:16px}
+footer b{color:var(--mut)}
+.brandline{color:#4a648c;margin-top:8px}
+
+/* bottom nav */
+#nav{position:fixed;left:0;right:0;bottom:0;z-index:20;background:#0b1a2ef2;
+  backdrop-filter:blur(10px);border-top:1px solid var(--line)}
+#navin{max-width:640px;margin:auto;display:flex}
+.nb{flex:1;padding:9px 0 10px;text-align:center;color:var(--mut2);font-size:11px;font-weight:700}
+.nb .e{display:block;font-size:21px;margin-bottom:2px;filter:grayscale(.4);opacity:.7}
+.nb.on{color:var(--g)}
+.nb.on .e{filter:none;opacity:1}
+</style>
+</head>
+<body>
+
+<div id="top"><div id="topin">
+  <div class="badge">🛡️</div>
+  <div>
+    <h1>ठगी <b>रक्षक</b></h1>
+    <div class="tag">पावर ओरिएंटर हब · ऑनलाइन ठगी से बचाव</div>
+  </div>
+</div></div>
+
+<div class="w">
+
+<!-- ========== मदद ========== -->
+<div class="page show" id="p-help">
+  <div class="hero">
+    <p class="big" style="font-size:22px;margin:16px 0 0;font-weight:800">क्या आपके साथ ठगी हुई है?</p>
+    <p>घबराओ मत। नीचे अपनी हालत चुनो, हम तुरंत सही कदम बताते हैं।</p>
+  </div>
+  <a class="call" href="tel:1930"><span class="ic">📞</span><span>अभी 1930 पर कॉल करो<small>सरकारी साइबर ठगी हेल्पलाइन · मुफ़्त · 24 घंटे</small></span></a>
+  <div class="clock"><span>⏱️</span><span><b>एक-एक मिनट क़ीमती है।</b> ठगी के बाद का पहला घंटा सबसे ज़रूरी। जितनी जल्दी शिकायत, पैसा बचने का मौक़ा उतना ज़्यादा।</span></div>
+
+  <div id="askBox">
+    <div class="sec-title">आपके साथ क्या हुआ?</div>
+    <div class="grid" id="optGrid"></div>
+  </div>
+
+  <div id="stepBox" style="display:none"></div>
+</div>
+
+<!-- ========== बचाव ========== -->
+<div class="page" id="p-save">
+  <div class="sec-title" style="margin-top:18px">ठगी से बचने के पक्के नियम</div>
+  <div id="prevBox"></div>
+  <div class="tip">💡 <b>याद रखो:</b> कोई भी बैंक, कंपनी या सरकारी अफ़सर फ़ोन या मैसेज पर आपका OTP, पिन या पासवर्ड कभी नहीं माँगता। जो माँगे, वो ठग है।</div>
+</div>
+
+<!-- ========== ज़रूरी नंबर ========== -->
+<div class="page" id="p-num">
+  <div class="sec-title" style="margin-top:18px">ज़रूरी सरकारी नंबर</div>
+  <div class="num"><div class="l"><div class="t">1930</div><div class="d">साइबर ठगी हेल्पलाइन (पैसे की ठगी)</div></div><a href="tel:1930">कॉल</a></div>
+  <div class="num"><div class="l"><div class="t">112</div><div class="d">पुलिस / आपातकालीन मदद</div></div><a href="tel:112">कॉल</a></div>
+  <div class="num"><div class="l"><div class="t">cybercrime.gov.in</div><div class="d">ऑनलाइन शिकायत दर्ज करने की सरकारी वेबसाइट</div></div><a href="https://cybercrime.gov.in" target="_blank" rel="noopener">खोलो</a></div>
+  <div class="tip">⚠️ <b>अपने बैंक का नंबर कहाँ से लें:</b> सिर्फ़ अपनी <b>पासबुक</b>, <b>कार्ड के पीछे</b>, या बैंक की <b>आधिकारिक वेबसाइट</b> से। Google पर दिखे या मैसेज में आए नंबर पर भरोसा मत करो, वो अक्सर <b>फ़र्ज़ी</b> होते हैं और ठगी का जाल होते हैं।</div>
+</div>
+
+<footer id="foot">
+  ये एक <b>मददगार गाइड</b> है, जो आपको सरकारी हेल्पलाइन तक पहुँचाती है।<br>
+  ये पुलिस या कोई सरकारी विभाग <b>नहीं</b> है। असली कार्रवाई <b>1930</b> और <b>cybercrime.gov.in</b> से होती है।<br>
+  हम आपकी कोई जानकारी (OTP, पासवर्ड, बैंक नंबर) <b>न माँगते हैं, न रखते हैं।</b>
+  <div class="brandline">पावर ओरिएंटर हब · Claude AI की मदद से बनाया गया</div>
+</footer>
+
+</div>
+
+<div id="nav"><div id="navin">
+  <button class="nb on" data-p="help"><span class="e">🆘</span>मदद</button>
+  <button class="nb" data-p="save"><span class="e">🛡️</span>बचाव</button>
+  <button class="nb" data-p="num"><span class="e">📞</span>नंबर</button>
+</div></div>
+
+<script>
+const $=id=>document.getElementById(id);
+
+const TYPES=[
+  {id:'money', e:'💳', t:'खाते से पैसे कट गए'},
+  {id:'otp',   e:'🔢', t:'OTP / पिन बता दिया'},
+  {id:'upi',   e:'📲', t:'UPI / QR से ठगी'},
+  {id:'loanapp',e:'📱', t:'फ़र्ज़ी लोन ऐप'},
+  {id:'link',  e:'🔗', t:'लिंक पर जानकारी भरी'},
+  {id:'call',  e:'☎️', t:'फ़र्ज़ी कॉल / धमकी'},
+  {id:'job',   e:'💼', t:'नौकरी / पैसे कमाओ झाँसा'},
+  {id:'prize', e:'🎁', t:'लॉटरी / इनाम का लालच'},
+];
+const EXTRA={
+  money:['खाते से पैसा कटा है','एक-एक मिनट क़ीमती है। सबसे पहले बैंक को फ़ोन करके खाता/कार्ड रुकवाओ, फिर 1930 पर कॉल करो।'],
+  otp:['OTP / पिन दे दिया','तुरंत अपना इंटरनेट बैंकिंग और UPI पिन/पासवर्ड बदलो, और बैंक को फ़ोन करके खाता रुकवाओ। ठग के पास अब आपके खाते की पहुँच हो सकती है।'],
+  upi:['UPI / QR से ठगी','याद रखो, पैसे "लेने" के लिए कभी QR स्कैन या पिन नहीं डालते, सिर्फ़ "देने" के लिए। तुरंत UPI पिन बदलो और बैंक को बताओ।'],
+  loanapp:['फ़र्ज़ी लोन ऐप','उस ऐप को डिलीट करो पर नाम और स्क्रीनशॉट रख लो। धमकी या ब्लैकमेल आए तो डरो मत, पैसा बिल्कुल मत भेजो, सीधे 1930 पर बताओ।'],
+  link:['फ़र्ज़ी लिंक पर जानकारी भरी','जिस लिंक पर जानकारी भरी, उससे जुड़े सारे पासवर्ड तुरंत बदलो, और बैंक को सतर्क करो।'],
+  call:['फ़र्ज़ी कॉल / धमकी','कोई भी पुलिस, CBI या बैंक अफ़सर फ़ोन पर पैसे या OTP नहीं माँगता। डरो मत, पैसा मत भेजो, कॉल काटकर 1930 पर बताओ।'],
+  job:['नौकरी / पैसे कमाओ झाँसा','असली नौकरी के लिए कोई पहले पैसा (रजिस्ट्रेशन फ़ीस) नहीं माँगता। अगर पैसा दे दिया है, तो तुरंत 1930 पर शिकायत करो।'],
+  prize:['लॉटरी / इनाम का लालच','जो लॉटरी आपने ख़रीदी ही नहीं, वो लगती नहीं। "इनाम पाने के लिए फ़ीस भरो" हमेशा ठगी है। पैसा दिया हो तो 1930 पर बताओ।'],
+};
+const COMMON=[
+  ['तुरंत बैंक को फ़ोन करो','अपने बैंक के कस्टमर केयर (पासबुक या कार्ड के पीछे वाला नंबर) पर कॉल करके खाता/कार्ड ब्लॉक करवाओ, ताकि और पैसा न जाए।'],
+  ['1930 पर कॉल करो','ऊपर लाल बटन दबाकर सरकारी साइबर हेल्पलाइन पर पूरी बात बताओ। जितनी जल्दी, पैसा वापस मिलने का मौक़ा उतना ज़्यादा।'],
+  ['cybercrime.gov.in पर शिकायत','सरकारी वेबसाइट पर लिखित शिकायत दर्ज करो और शिकायत नंबर सँभालकर रखो।'],
+  ['सबूत सँभालो','मैसेज, कॉल लॉग, लेन-देन के स्क्रीनशॉट रखो। कुछ भी डिलीट मत करो, ये शिकायत में काम आएँगे।'],
+];
+const PREV=[
+  ['🔐','OTP-पिन किसी को मत दो','बैंक, कंपनी या "अफ़सर", कोई भी OTP, पिन या पासवर्ड माँगे तो वो ठग है। किसी को मत बताओ।'],
+  ['🔗','अनजान लिंक मत खोलो','मैसेज या WhatsApp पर आए लिंक पर क्लिक करके जानकारी मत भरो। बैंक की वेबसाइट ख़ुद टाइप करके खोलो।'],
+  ['📞','डराने वाली कॉल से मत डरो','"आपका खाता बंद होगा", "पुलिस केस है", ऐसी धमकी देकर जल्दबाज़ी करवाते हैं। रुको, सोचो, किसी अपने से पूछो।'],
+  ['💰','बिना माँगे पैसा / सस्ता लोन','"लोन मंज़ूर हो गया", "घर बैठे कमाओ", "पहले फ़ीस भरो", ये सब जाल हैं। असली लोन बिना माँगे नहीं आता।'],
+  ['📲','ऐप सोच-समझकर डालो','लोन या कमाई वाली ऐप जो फ़ोटो-कॉन्टैक्ट की इजाज़त माँगे, उससे दूर रहो। सिर्फ़ Play Store से भरोसेमंद ऐप लो।'],
+  ['🏦','नंबर सही जगह से लो','कस्टमर केयर का नंबर Google या मैसेज से मत लो, वो फ़र्ज़ी हो सकता है। पासबुक या कार्ड के पीछे से लो।'],
+];
+
+// build option grid
+$('optGrid').innerHTML=TYPES.map(x=>
+  `<button class="opt" onclick="showSteps('${x.id}')"><span class="e">${x.e}</span><span class="t">${x.t}</span></button>`).join('');
+
+// build prevention
+$('prevBox').innerHTML=PREV.map(p=>
+  `<div class="pcard"><h3><span class="em">${p[0]}</span>${p[1]}</h3><p>${p[2]}</p></div>`).join('');
+
+function showSteps(id){
+  const ty=TYPES.find(x=>x.id===id);
+  const list=[EXTRA[id], ...COMMON];
+  $('stepBox').innerHTML=
+    `<div class="selhead"><span class="e">${ty.e}</span><span class="t">${EXTRA[id][0]}</span></div>`+
+    list.map((s,i)=>`<div class="step"><h3><span class="n">${i+1}</span>${s[0]}</h3><p>${s[1]}</p></div>`).join('')+
+    `<div class="warn"><span>⚠️</span><span><b>सावधान:</b> ठग से आगे कोई बात मत करो, और उसे और पैसा या जानकारी बिल्कुल मत दो।</span></div>`+
+    `<a class="linkbtn" href="https://cybercrime.gov.in" target="_blank" rel="noopener">🌐 cybercrime.gov.in पर शिकायत दर्ज करो</a>`+
+    `<button class="back" onclick="backHelp()">↩ वापस, दूसरी हालत चुनो</button>`;
+  $('askBox').style.display='none'; $('stepBox').style.display='block';
+  scrollTo({top:0,behavior:'smooth'});
+}
+function backHelp(){ $('stepBox').style.display='none'; $('askBox').style.display='block'; scrollTo({top:0,behavior:'smooth'}); }
+
+// nav
+document.querySelectorAll('.nb').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('.nb').forEach(x=>x.classList.remove('on')); b.classList.add('on');
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('show'));
+  $('p-'+b.dataset.p).classList.add('show');
+  if(b.dataset.p==='help') backHelp();
+  $('foot').style.display='block';
+  scrollTo({top:0,behavior:'smooth'});
+});
+</script>
+</body>
+</html>
